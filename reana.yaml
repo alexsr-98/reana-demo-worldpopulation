@@ -1,22 +1,18 @@
 version: 0.3.0
 inputs:
   files:
-    - code/worldpopulation.ipynb
-    - data/World_historical_and_predicted_populations_in_percentage.csv
+    - notebooks/ejercicio2.ipynb
   parameters:
-    notebook: code/worldpopulation.ipynb
-    input_file: data/World_historical_and_predicted_populations_in_percentage.csv
-    output_file: results/plot.png
-    region: Africa
-    year_min: 1500
-    year_max: 2012
+    notebook: notebooks/ejercicio2.ipynb
 workflow:
   type: serial
   specification:
     steps:
       - environment: 'reanahub/reana-env-jupyter'
         commands:
-          - mkdir -p results && papermill ${notebook} /dev/null -p input_file ${input_file} -p output_file ${output_file} -p region ${region} -p year_min ${year_min} -p year_max ${year_max}
+          - papermill ${notebook}
 outputs:
   files:
-    - results/plot.png
+    - plots/roc.png
+    - plots/discdnn.png
+    - plots/discbdt.png
